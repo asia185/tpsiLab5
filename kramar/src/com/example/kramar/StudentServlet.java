@@ -33,6 +33,14 @@ public class StudentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
+
+        if (session.getAttribute("visitors") == null) {
+            session.setAttribute("visitors", 0);
+        }
+
+        session.setAttribute("visitors", (int) session.getAttribute("visitors") + 1);
+
+
         if (session.getAttribute("students") == null) {
             session.setAttribute("students", new ArrayList<>());
         }
@@ -57,3 +65,4 @@ public class StudentServlet extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 }
+
